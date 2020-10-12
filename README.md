@@ -40,7 +40,7 @@
 
   
 <h3> :iphone: Download </h3>
-<p> https://bit.ly/2GsFNCi</p>
+<p> https://bit.ly/2GFqPsU</p>
 
 <h5> Made with :heart: by Riswanda Himawan </h3>
 
