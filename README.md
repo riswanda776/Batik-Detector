@@ -1,6 +1,7 @@
 
 # Batik Detector
 
+![Screenshot_20201012-092438](https://user-images.githubusercontent.com/35683696/95699795-a8555580-0c6f-11eb-8daa-f42ae8bc5eb7.png)
 
 <h3> :thinking: Apa itu Batik Detector ? </h3>
 
