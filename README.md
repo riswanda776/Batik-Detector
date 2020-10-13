@@ -6,7 +6,7 @@
 <h3> :thinking: Apa itu Batik Detector ? </h3>
 
 <p> Adalah sebuah Aplikasi untuk mendeteksi Jenis atau Motif Batik.
-  dibuat menggunakan Flutter dan Tensorflow untuk Training Model</p>
+  dibuat menggunakan Flutter dan Tensorflow</p>
  
 
 <h3> 	:pushpin: Jenis Batik yang dapat dideteksi</h3>
