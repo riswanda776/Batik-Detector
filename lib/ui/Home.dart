@@ -73,12 +73,7 @@ class _HomeState extends State<Home> {
       }
 
       isLoading = false;
-      var hasil = output[0]['confidence'];
-      if (hasil != null) {
-        print(hasil);
-      } else {
-        print("nothing");
-      }
+   
 
       print(result);
     });
