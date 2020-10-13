@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
     Tflite.close();
   }
 
-/// Load model 
+  /// Load model
   Future loadModel() async {
     await Tflite.loadModel(
       model: "assets/model_unquant.tflite",
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-/// get image from phone
+  /// get image from phone
   void getImage(ImageSource imageSource) async {
     var image = await ImagePicker().getImage(source: imageSource);
     if (image == null) {
@@ -53,8 +53,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-
-/// processing image dan get result
+  /// processing image dan get result
   void detectingImage(File image) async {
     var output = await Tflite.runModelOnImage(
       path: image.path,
@@ -67,13 +66,19 @@ class _HomeState extends State<Home> {
     await Future.delayed(Duration(seconds: 3));
     setState(() {
       if (output.length > 0 &&
-          double.parse(output[0]['confidence'].toString()) > 0.98) {
+          double.parse(output[0]['confidence'].toString()) > 0.89) {
         result = output[0]['label'].toString().replaceAll(RegExp(r'[0-9]'), '');
       } else {
         result = null;
       }
 
       isLoading = false;
+      var hasil = output[0]['confidence'];
+      if (hasil != null) {
+        print(hasil);
+      } else {
+        print("nothing");
+      }
 
       print(result);
     });
@@ -109,13 +114,13 @@ class _HomeState extends State<Home> {
         ],
         backgroundColor: Colors.transparent,
       ),
+
       /// if image is processing/detecting then show onDetecting widget method, else show main widget
       body: isLoading ? onDetecting(context) : mainMenu(context),
     );
   }
 
-
-/// main widget for inital widget
+  /// main widget for inital widget
   Container mainMenu(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: getHeight(context) * 0.02),
@@ -127,7 +132,6 @@ class _HomeState extends State<Home> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-
           /// if image null then show illustration else show image
           imageFile == null
               ? Padding(
@@ -154,7 +158,7 @@ class _HomeState extends State<Home> {
                         color: primaryColor),
                   ),
                 ),
-                
+
           SizedBox(
             height: 10,
           ),
@@ -178,12 +182,13 @@ class _HomeState extends State<Home> {
                           color: Colors.green),
                     ),
 
-
-          imageFile == null? SizedBox(
-            height: 0,
-          ) : SizedBox(
-            height: getHeight(context) * 0.07,
-          ),
+          imageFile == null
+              ? SizedBox(
+                  height: 0,
+                )
+              : SizedBox(
+                  height: getHeight(context) * 0.07,
+                ),
 
           /// Button for pick image
           Container(
@@ -203,13 +208,11 @@ class _HomeState extends State<Home> {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-
                   ///show modal pickerImage
                   showModalBottomSheet(
                       context: (context),
                       shape: StadiumBorder(),
                       builder: (context) => buildPickerImage());
-
                 },
                 borderRadius: BorderRadius.circular(20),
                 child: Center(
@@ -234,8 +237,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-
-/// widget show while image processing
+  /// widget show while image processing
   Container onDetecting(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: getHeight(context) * 0.02),
@@ -280,8 +282,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-
-/// Widget modal pick image, pick image from camera or gallery
+  /// Widget modal pick image, pick image from camera or gallery
   Container buildPickerImage() {
     return Container(
       height: getHeight(context) * 0.2,
